@@ -35,13 +35,18 @@ const cards =  {
 
 const chamberScore = (ev, scorePl) => {
     
+    if(checkTrues(scoreChamber) >= 3 && scoreChamber[scorePl] === false) { return 0 }
     scoreChamber[scorePl] = !scoreChamber[scorePl]
     buttonId = "#button" + scorePl
     document.querySelector(buttonId).style.backgroundColor = scoreChamber[scorePl] ? "gold" : defaultColor
     console.log(scoreChamber)
 }
 
-
+const checkTrues = scores => {
+    let count = 0
+    scores.forEach(i => {if(i === true) { count++ }})
+    return count
+}
 
 
 
