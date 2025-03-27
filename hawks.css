@@ -1,0 +1,54 @@
+header h1{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#sentenceText{
+    text-align: center;
+    font-weight: 900;
+    font-size: large;
+
+}
+
+
+.players{
+    display:flex;
+    justify-content: space-around;
+}
+
+.playerCard{
+    min-height: 30vh;
+    width: 15vw;
+    border-radius: 3px;
+    border-width: 3px;
+    padding: 1px;
+    text-align: center;
+    margin-right:4vh;
+}
+
+.p1{
+    background-color: lightgreen;
+}
+
+.p2{
+    background-color: lightsalmon;
+}
+
+.p3{
+    background-color: lightskyblue;
+}
+
+.playerImg{
+    width: 80%;
+    margin: auto;
+}
+
+.buttonDiv{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#nextButton{
+    min-height: 20px;
+}

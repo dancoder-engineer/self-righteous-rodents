@@ -1,4 +1,46 @@
-import { cards } from './data.js'
+let round = 0
+let sentences = []
+
+const cards =  {
+    "card0": "What",
+    "card4": "?",
+    "card13":[
+        "is cute",
+        "plays a game",
+        "is seen as evil",
+        "can do whatever it wants",
+        "solves mysteries",
+        "is mocked",
+        "can be useful, given he right circumstances",
+        "drinks from a cup",
+        "is on the plane Jupiter",
+        "speaks in a loud voice",
+        "is dumb",
+        "is annoying"
+    ],
+    "card2":[
+        "and",
+        "because it",
+        "but never",
+        "or always",
+        "yet sometimes",
+        "and so"
+    ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//import { cards } from './data.js'
 let dex = {}
 
 
@@ -9,8 +51,8 @@ function shuffle(arr){
     let ret = []
     while(arr.length > 0){
         let spot = Math.floor(Math.random() * arr.length)
-        ret.push(arr[spot])
-        arr.splice(spot,1)
+        ret.push(arr.splice(spot,1))
+        
       }
       return ret
     }
@@ -32,17 +74,38 @@ function makeSentence(){
 
 }
 
+function initSentences(dex){
+    let sentences = []
+    while(dex.prepositions.length > 1){ 
+        sentences.push(makeSentence())
+    }
+    return sentences
+}
+
+function toNextRound(){
+    if(sentences.length === 0){
+        document.querySelector("#nextButton").style.display = "none"
+    }
+
+    document.querySelector('#sentenceText').innerText = sentences.splice(0,1)
+    if(round === 0) {
+        document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
+    }
+
+
+   // console.log(sentences)
+}
+
 function main(){
 
 
     dex = initDecks()
+    sentences = initSentences(dex)
+   
+
     
 
-    while(dex.prepositions.length > 1){ 
-        console.log(makeSentence())
-    }
-
-    let y = prompt("a")
+   // let y = prompt("a")
 
     let ptDistribution = [1]
 
