@@ -1,5 +1,8 @@
 let round = 0
 let sentences = []
+let scoreChamber = [false, false, false, false, false, false, false, false, false]
+
+const defaultColor = "ivory"
 
 const cards =  {
     "card0": "What",
@@ -30,7 +33,13 @@ const cards =  {
 
 
 
-
+const chamberScore = (ev, scorePl) => {
+    
+    scoreChamber[scorePl] = !scoreChamber[scorePl]
+    buttonId = "#button" + scorePl
+    document.querySelector(buttonId).style.backgroundColor = scoreChamber[scorePl] ? "gold" : defaultColor
+    console.log(scoreChamber)
+}
 
 
 

@@ -22,24 +22,35 @@
         </div>
 
         <div class="players">
-            <div class="playerCard p1">
+            <div class="playerCard p0">
                 Guinea Pig
                 <input></input>
+                <img class="playerImg" src="images/p0.png">
+                <p id="score0">Score: 0</p>
+                <button class="giveButton" id="button0" onclick="chamberScore(event, 0)">
+                    Not Scoring
+                </button>
 
+            </div>
+
+            <div class="playerCard p1">
+                Chinchilla
+                <input></input>
                 <img class="playerImg" src="images/p1.png">
-                <p id="score1">Score: 5</p>
-                <div class="giveButton"></div>
-
+                <p id="score1">Score: 0</p>
+                <button class="giveButton" id="button1" onclick="chamberScore(event, 1)">
+                    Not Scoring
+                </button>
             </div>
 
             <div class="playerCard p2">
-                <p>Chinchilla</p>
+                Hamster
+                <input></input>
                 <img class="playerImg" src="images/p2.png">
-            </div>
-
-            <div class="playerCard p3">
-                <p>Hamster</p>
-                <img class="playerImg" src="images/p3.png">
+                <p id="score2">Score: 0</p>
+                <button class="giveButton" id="button2" onclick="chamberScore(event, 2)">
+                    Not Scoring
+                </button>
             </div>
         </div>
 
