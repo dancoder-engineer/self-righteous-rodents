@@ -91,8 +91,9 @@ const checkTrues = scores => {
 
 
 
-function shuffle(arr){
+function shuffle(deck){
     let ret = []
+    let arr = [...deck]
     while(arr.length > 0){
         let spot = Math.floor(Math.random() * arr.length)
         ret.push(arr.splice(spot,1))
@@ -149,7 +150,8 @@ function initSentences(dex){
     return sentences
 }
 
-function toNextRound(){
+function toNextRound(){ 
+    
 
     if(postGame){
         resetVars()
@@ -157,19 +159,20 @@ function toNextRound(){
         postGame = false
     }
 
-    if(round === 1) {
+    if(round === 1) { //this is 1 in order to test the post ganme screen
         postGame = true
         doPostGame()
         return 0
     }
 
     if(round === 0) {
+        dex = initDecks()
+        sentences = initSentences(dex)
         if (!initView()) { return 0 }
     }
 
     if(sentences.length === 0 && round === 0){
-        dex = initDecks()
-        sentences = initSentences(dex)
+        
     }
 
     if(sentences.length === 0){
@@ -201,7 +204,7 @@ const resetVars = () => {
     scoreChamber = [false, false, false, false, false, false, false, false]
 }
 
-const resetView = () => {
+const resetView = () => { 
     dex = initDecks()
     sentences = initSentences(dex)
     for(let i = 0; i < 8; i++){
