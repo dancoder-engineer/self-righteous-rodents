@@ -128,9 +128,7 @@ function initView(){
 
     document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
 
-    for(let i of document.querySelectorAll(".preGame")){
-        i.style.display = "none"
-    }
+    document.querySelector("#preGameDiv").style.display = "none"
 
 
     for(let i = 0; i < noOfPlayers; i++){
