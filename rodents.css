@@ -6,8 +6,7 @@ header h1{
 #sentenceText{
     text-align: center;
     font-weight: 900;
-    font-size: large;
-
+    font-size: 2em;
 }
 
 input{
@@ -111,11 +110,14 @@ input{
     display: block;
     margin: auto;
     width: 40%;
+    max-height: 80vh;
 }
-
-
 
 #playerNo{
     margin-left: 5px;
     width: 20px;
+}
+
+#postGame{
+    display: none;
 }

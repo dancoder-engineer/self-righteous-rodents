@@ -2,6 +2,7 @@ let round = 0
 let sentences = []
 let scoreChamber = [false, false, false, false, false, false, false, false]
 let scores = [0, 0, 0, 0, 0, 0, 0, 0]
+let postGame = false
 
 let noOfPlayers = 0
 const defaultColor = "ivory"
@@ -51,7 +52,6 @@ const clearButton = scorePl => {
     let buttonId = "#button" + scorePl
     document.querySelector(buttonId).style.backgroundColor = defaultColor
     document.querySelector(buttonId).innerText = 'No score'
- 
 }
 
 const resetButtons = noOfPlayers => {
@@ -124,10 +124,10 @@ function initView(){
 
     if(isNaN(noOfPlayers)) { return false }
 
-    if(noOfPlayers > 8) { return false }
+    if(noOfPlayers < 3 || noOfPlayers > 8 ) { return false }
 
     document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
-
+    document.querySelector("#playerHolder").style.display = "block"
     document.querySelector("#preGameDiv").style.display = "none"
 
 
@@ -135,7 +135,7 @@ function initView(){
         let width = 80 / noOfPlayers
         document.querySelector("#div" + i).style.display = "inline-block"
         document.querySelector("#div" + i).style.width = width + "vw"  
-        document.querySelector("#score" + i).innerText = "Scoxre: 0"
+        document.querySelector("#score" + i).innerText = "Score: 0"
     }
 
     return true
@@ -151,6 +151,18 @@ function initSentences(dex){
 
 function toNextRound(){
 
+    if(postGame){
+        resetVars()
+        resetView()
+        postGame = false
+    }
+
+    if(round === 1) {
+        postGame = true
+        doPostGame()
+        return 0
+    }
+
     if(round === 0) {
         if (!initView()) { return 0 }
     }
@@ -161,7 +173,7 @@ function toNextRound(){
     }
 
     if(sentences.length === 0){
-        document.querySelector("#nextButton").style.display = "none"
+       // document.querySelector("#nextButton").style.display = "none"
     }
 
 
@@ -173,3 +185,30 @@ function toNextRound(){
 
 }
 
+const doPostGame = () => {
+    
+ //   document.querySelector("#mainDiv").style.display = "none"
+    document.querySelector("#playerHolder").style.display = "none"
+    document.querySelector("#postGame").style.display = "inline-block"
+    document.querySelector("#nextButton").innerText = "Reset Game"
+    document.querySelector("#sentenceText").innerText = ""
+    document.querySelector("#playerNo").value = ""
+}
+
+const resetVars = () => {
+    round = 0
+    scores = [0, 0, 0, 0, 0, 0, 0, 0]
+    scoreChamber = [false, false, false, false, false, false, false, false]
+}
+
+const resetView = () => {
+    dex = initDecks()
+    sentences = initSentences(dex)
+    for(let i = 0; i < 8; i++){
+        document.querySelector("#div" + i).style.display = "none"
+    }
+
+    document.querySelector("#postGame").style.display = "none"
+    document.querySelector("#preGameDiv").style.display = "block"
+    
+}
