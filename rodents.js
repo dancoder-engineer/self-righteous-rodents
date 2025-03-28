@@ -1,6 +1,7 @@
 let round = 0
 let sentences = []
 let scoreChamber = [false, false, false, false, false, false, false, false]
+let scores = [0, 0, 0, 0, 0, 0, 0, 0]
 
 const noOfPlayers = 5
 const defaultColor = "ivory"
@@ -33,6 +34,20 @@ const cards =  {
     ]
 }
 
+const updateScores = noOfPlayers => {
+    for(let i = 0; i < noOfPlayers; i++){ 
+        scorePoints(i)
+    }
+}
+
+const scorePoints = scorePl => {
+    if(scoreChamber[scorePl] === true){
+        scores[scorePl]++
+        document.querySelector("#score" + scorePl).innerText = "Score: " + scores[scorePl]
+        console.log(scores)
+    }
+}
+
 const clearButton = scorePl => {
     let buttonId = "#button" + scorePl
     document.querySelector(buttonId).style.backgroundColor = defaultColor
@@ -41,11 +56,10 @@ const clearButton = scorePl => {
 }
 
 const resetButtons = noOfPlayers => {
-    let scoreChamber = [false, false, false, false, false, false, false, false]
+    scoreChamber = [false, false, false, false, false, false, false, false]
     for(let i = 0; i < noOfPlayers; i++){ 
         clearButton(i)
     }
-
 }
 
 
@@ -112,7 +126,8 @@ function initView(){
     for(let i = 0; i < noOfPlayers; i++){
         let width = 80 / noOfPlayers
         document.querySelector("#div" + i).style.display = "inline-block"
-        document.querySelector("#div" + i).style.width = width + "vw"        
+        document.querySelector("#div" + i).style.width = width + "vw"  
+        document.querySelector("#score" + i).innerText = "Score: 0"
     }
 }
 
@@ -133,6 +148,7 @@ function toNextRound(){
         initView()
     }
     document.querySelector('#sentenceText').innerText = sentences.splice(0,1)
+    updateScores(noOfPlayers)
     resetButtons(noOfPlayers)
     round++
 
