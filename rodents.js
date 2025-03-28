@@ -160,7 +160,6 @@ function toNextRound(){
     }
 
     if(round === 1) { //this is 1 in order to test the post ganme screen
-        postGame = true
         doPostGame()
         return 0
     }
@@ -176,7 +175,8 @@ function toNextRound(){
     }
 
     if(sentences.length === 0){
-       // document.querySelector("#nextButton").style.display = "none"
+        doPostGame()
+        return 0
     }
 
 
@@ -189,7 +189,7 @@ function toNextRound(){
 }
 
 const doPostGame = () => {
-    
+    postGame = true
  //   document.querySelector("#mainDiv").style.display = "none"
     document.querySelector("#playerHolder").style.display = "none"
     document.querySelector("#postGame").style.display = "inline-block"
