@@ -3,7 +3,7 @@ let sentences = []
 let scoreChamber = [false, false, false, false, false, false, false, false]
 let scores = [0, 0, 0, 0, 0, 0, 0, 0]
 
-const noOfPlayers = 5
+let noOfPlayers = 0
 const defaultColor = "ivory"
 let dex = {}
 
@@ -44,7 +44,6 @@ const scorePoints = scorePl => {
     if(scoreChamber[scorePl] === true){
         scores[scorePl]++
         document.querySelector("#score" + scorePl).innerText = "Score: " + scores[scorePl]
-        console.log(scores)
     }
 }
 
@@ -71,8 +70,6 @@ const chamberScore = (ev, scorePl) => {
     let buttonId = "#button" + scorePl
     document.querySelector(buttonId).style.backgroundColor = scoreChamber[scorePl] ? "gold" : defaultColor
     document.querySelector(buttonId).innerText = scoreChamber[scorePl] ? 'Give point' : 'No score'
-    
-    console.log(scoreChamber)
 }
 
 const checkTrues = scores => {
@@ -122,13 +119,26 @@ function makeSentence(){
 }
 
 function initView(){
+
+    noOfPlayers = parseInt(document.querySelector("#playerNo").value)
+
+    if(isNaN(noOfPlayers)) { return false }
+
     document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
+
+    for(let i of document.querySelectorAll(".preGame")){
+        i.style.display = "none"
+    }
+
+
     for(let i = 0; i < noOfPlayers; i++){
         let width = 80 / noOfPlayers
         document.querySelector("#div" + i).style.display = "inline-block"
         document.querySelector("#div" + i).style.width = width + "vw"  
-        document.querySelector("#score" + i).innerText = "Score: 0"
+        document.querySelector("#score" + i).innerText = "Scoxre: 0"
     }
+
+    return true
 }
 
 function initSentences(dex){
@@ -140,37 +150,26 @@ function initSentences(dex){
 }
 
 function toNextRound(){
+
+    if(round === 0) {
+        if (!initView()) { return 0 }
+    }
+
+    if(sentences.length === 0 && round === 0){
+        dex = initDecks()
+        sentences = initSentences(dex)
+    }
+
     if(sentences.length === 0){
         document.querySelector("#nextButton").style.display = "none"
     }
 
-    if(round === 0) {
-        initView()
-    }
+
     document.querySelector('#sentenceText').innerText = sentences.splice(0,1)
     updateScores(noOfPlayers)
     resetButtons(noOfPlayers)
     round++
 
-    
-
-   // console.log(sentences)
-}
-
-function main(){
-
-
-    dex = initDecks()
-    sentences = initSentences(dex)
-    
-    
-    
-
-   // let y = prompt("a")
-
-    let ptDistribution = [1]
 
 }
 
-
-main()
