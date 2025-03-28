@@ -18,17 +18,19 @@ input{
 .players{
     display:flex;
     justify-content: space-around;
-    flex-flow: wrap;
+    flex-wrap: wrap;
 }
 
 .playerCard{
-    min-height: 30vh;
+    min-height: 20vh;
     width: 15vw;
     border-radius: 3px;
     border-width: 3px;
     padding: 1px;
     text-align: center;
-    margin-right:4vh;
+    margin-right:4px;
+    margin-bottom: 10px;
+    display: none;
 }
 
 .playerCard input{
@@ -61,6 +63,26 @@ input{
     background-color: lightskyblue;
 }
 
+.p3{
+    background-color:lemonchiffon;
+}
+
+.p4{
+    background-color:lightsteelblue;
+}
+
+.p5{
+    background-color:lightslategray;
+}
+
+.p6{
+    background-color:lightpink;
+}
+
+.p7{
+    background-color:lightgoldenrodyellow;
+}
+
 .scoreSpan{
     vertical-align: middle;
 }
@@ -79,3 +101,4 @@ input{
 #nextButton{
     min-height: 20px;
 }
+

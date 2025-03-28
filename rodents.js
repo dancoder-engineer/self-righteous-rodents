@@ -1,8 +1,10 @@
 let round = 0
 let sentences = []
-let scoreChamber = [false, false, false, false, false, false, false, false, false]
+let scoreChamber = [false, false, false, false, false, false, false, false]
 
+const noOfPlayers = 5
 const defaultColor = "ivory"
+let dex = {}
 
 const cards =  {
     "card0": "What",
@@ -16,7 +18,7 @@ const cards =  {
         "is mocked",
         "can be useful, given he right circumstances",
         "drinks from a cup",
-        "is on the plane Jupiter",
+        "is on the planet Jupiter",
         "speaks in a loud voice",
         "is dumb",
         "is annoying"
@@ -31,14 +33,31 @@ const cards =  {
     ]
 }
 
+const clearButton = scorePl => {
+    let buttonId = "#button" + scorePl
+    document.querySelector(buttonId).style.backgroundColor = defaultColor
+    document.querySelector(buttonId).innerText = 'No score'
+ 
+}
+
+const resetButtons = noOfPlayers => {
+    let scoreChamber = [false, false, false, false, false, false, false, false]
+    for(let i = 0; i < noOfPlayers; i++){ 
+        clearButton(i)
+    }
+
+}
 
 
 const chamberScore = (ev, scorePl) => {
     
     if(checkTrues(scoreChamber) >= 3 && scoreChamber[scorePl] === false) { return 0 }
+    if(round === 0) { return 0 }
     scoreChamber[scorePl] = !scoreChamber[scorePl]
-    buttonId = "#button" + scorePl
+    let buttonId = "#button" + scorePl
     document.querySelector(buttonId).style.backgroundColor = scoreChamber[scorePl] ? "gold" : defaultColor
+    document.querySelector(buttonId).innerText = scoreChamber[scorePl] ? 'Give point' : 'No score'
+    
     console.log(scoreChamber)
 }
 
@@ -55,7 +74,7 @@ const checkTrues = scores => {
 
 
 //import { cards } from './data.js'
-let dex = {}
+
 
 
 
@@ -88,6 +107,15 @@ function makeSentence(){
 
 }
 
+function initView(){
+    document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
+    for(let i = 0; i < noOfPlayers; i++){
+        let width = 80 / noOfPlayers
+        document.querySelector("#div" + i).style.display = "inline-block"
+        document.querySelector("#div" + i).style.width = width + "vw"        
+    }
+}
+
 function initSentences(dex){
     let sentences = []
     while(dex.prepositions.length > 1){ 
@@ -101,11 +129,14 @@ function toNextRound(){
         document.querySelector("#nextButton").style.display = "none"
     }
 
-    document.querySelector('#sentenceText').innerText = sentences.splice(0,1)
     if(round === 0) {
-        document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
+        initView()
     }
+    document.querySelector('#sentenceText').innerText = sentences.splice(0,1)
+    resetButtons(noOfPlayers)
+    round++
 
+    
 
    // console.log(sentences)
 }
@@ -115,8 +146,8 @@ function main(){
 
     dex = initDecks()
     sentences = initSentences(dex)
-   
-
+    
+    
     
 
    // let y = prompt("a")
