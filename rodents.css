@@ -102,3 +102,13 @@ input{
     min-height: 20px;
 }
 
+#preGameDiv{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#playerNo{
+    margin-left: 5px;
+    width: 20px;
+}

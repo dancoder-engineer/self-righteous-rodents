@@ -124,6 +124,8 @@ function initView(){
 
     if(isNaN(noOfPlayers)) { return false }
 
+    if(noOfPlayers > 8) { return false }
+
     document.querySelector("#nextButton").innerText = "Accept points and Start Next Round"
 
     for(let i of document.querySelectorAll(".preGame")){
