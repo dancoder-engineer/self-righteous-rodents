@@ -3,37 +3,12 @@ let sentences = []
 let scoreChamber = [false, false, false, false, false, false, false, false]
 let scores = [0, 0, 0, 0, 0, 0, 0, 0]
 let postGame = false
+let debug = false
 
 let noOfPlayers = 0
 const defaultColor = "ivory"
 let dex = {}
 
-const cards =  {
-    "card0": "What",
-    "card4": "?",
-    "card13":[
-        "is cute",
-        "plays a game",
-        "is seen as evil",
-        "can do whatever it wants",
-        "solves mysteries",
-        "is mocked",
-        "can be useful, given he right circumstances",
-        "drinks from a cup",
-        "is on the planet Jupiter",
-        "speaks in a loud voice",
-        "is dumb",
-        "is annoying"
-    ],
-    "card2":[
-        "and",
-        "because it",
-        "but never",
-        "or always",
-        "yet sometimes",
-        "and so"
-    ]
-}
 
 const updateScores = noOfPlayers => {
     for(let i = 0; i < noOfPlayers; i++){ 
@@ -62,7 +37,7 @@ const resetButtons = noOfPlayers => {
 }
 
 
-const chamberScore = (ev, scorePl) => {
+const chamberScore = (ev, scorePl) => { 
     
     if(checkTrues(scoreChamber) >= 3 && scoreChamber[scorePl] === false) { return 0 }
     if(round === 0) { return 0 }
@@ -159,7 +134,8 @@ function toNextRound(){
         postGame = false
     }
 
-    if(round === 1) { //this is 1 in order to test the post ganme screen
+    if(debug && round === 2) { //this is 1 in order to test the post ganme screen
+        updateScores(noOfPlayers)
         doPostGame()
         return 0
     }
@@ -175,6 +151,7 @@ function toNextRound(){
     }
 
     if(sentences.length === 0){
+        updateScores(noOfPlayers)
         doPostGame()
         return 0
     }
@@ -184,19 +161,8 @@ function toNextRound(){
     updateScores(noOfPlayers)
     resetButtons(noOfPlayers)
     round++
-
-
 }
 
-const doPostGame = () => {
-    postGame = true
- //   document.querySelector("#mainDiv").style.display = "none"
-    document.querySelector("#playerHolder").style.display = "none"
-    document.querySelector("#postGame").style.display = "inline-block"
-    document.querySelector("#nextButton").innerText = "Reset Game"
-    document.querySelector("#sentenceText").innerText = ""
-    document.querySelector("#playerNo").value = ""
-}
 
 const resetVars = () => {
     round = 0
