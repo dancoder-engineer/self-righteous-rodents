@@ -3,7 +3,9 @@
         scoreDict.sort((a, b) => b.pScore-a.pScore)
         let scoreString = ""
         for(let i = 0; i < noOfPlayers; i++) {
-            scoreString += `Player ${scoreDict[i].pNum}: ${scoreDict[i].pScore} points<br>`
+            let div = document.querySelector(`#div${i}`)
+            let playerName = div.querySelector("input").value || div.innerHTML.split("\n")[1].trim()
+            scoreString += `${playerName}: ${scoreDict[i].pScore} points<br>`
         }
         return scoreString
     }

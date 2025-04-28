@@ -157,7 +157,7 @@ function toNextRound(){
     }
 
 
-    document.querySelector('#sentenceText').innerText = sentences.splice(0,1)
+    document.querySelector('#sentenceText').innerHTML = `Player ${(round % noOfPlayers) + 1} is the judge.<BR>The sentence is: ` + sentences.splice(0,1)
     updateScores(noOfPlayers)
     resetButtons(noOfPlayers)
     round++

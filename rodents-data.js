@@ -1,4 +1,3 @@
-
 const cards =  {
     "card0": "What",
     "card4": "?",
