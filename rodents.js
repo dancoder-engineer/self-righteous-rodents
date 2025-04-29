@@ -58,14 +58,6 @@ const checkTrues = scores => {
 
 
 
-
-//import { cards } from './data.js'
-
-
-
-
-
-
 function shuffle(deck){
     let ret = []
     let arr = [...deck]
@@ -146,10 +138,6 @@ function toNextRound(){
         if (!initView()) { return 0 }
     }
 
-    if(sentences.length === 0 && round === 0){
-        
-    }
-
     if(sentences.length === 0){
         updateScores(noOfPlayers)
         doPostGame()
@@ -157,7 +145,7 @@ function toNextRound(){
     }
 
 
-    document.querySelector('#sentenceText').innerHTML = `Player ${(round % noOfPlayers) + 1} is the judge.<BR>The sentence is: ` + sentences.splice(0,1)
+    document.querySelector('#sentenceText').innerHTML = `${getName((round % noOfPlayers))} is the judge.<BR>The question is: ` + sentences.splice(0,1)
     updateScores(noOfPlayers)
     resetButtons(noOfPlayers)
     round++
@@ -180,4 +168,9 @@ const resetView = () => {
     document.querySelector("#postGame").style.display = "none"
     document.querySelector("#preGameDiv").style.display = "block"
     
+}
+
+function getName(i){
+    let div = document.querySelector(`#div${i}`)
+    return div.querySelector("input").value || div.innerHTML.split("\n")[1].trim()
 }
